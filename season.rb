@@ -55,34 +55,7 @@ class Season
   #
   # Returns true or false depending on whether or not date is within the season.
   def in_season?(date)
-    #2011-10-28 - opening stay date, passes
-    #2011-10-29 - passes
-    #season 1
-    #2011-09-01 - open day of season
-    #2012-01-31 - last day of season
-    #season 2
-    #2011-08-01 - first day of seaason
-    #2011-08-31 - last day of season
-    #in_season = ((date.month >= @open_month && date.day >= @open_day) ||
-                 #(date.month < @open_month && date.month <= @close_month && date.day <= @close_day)) &&
-                #((date.month <= @close_month && date.day <= @close_day) ||
-                 #(@close_month == 2 && date.month <= @close_month && date.day > @close_day) ||
-                 #(date.month > @close_month && date.month >= @open_month && date.day >= @open_day))
     (@first_day..@last_day).include?(date)
-       #this covers the standard idea that a date of '02-01' fits into a season running '01-01' to '03-01'
-       #this would be false on date '10-01' for a season running '12-01' to '10-31' this season spans a year
-    #if (date.month >= @open_month && date.day >= @open_day) && (date.month <= @close_month && date.day <= @close_day)
-      #true
-      #this covers a date of '10-01' for a season running '12-01' to '10-31' this season spans a year
-      #there's no check for date.day being greater than or equal to the open_day, what if the season opened '12-15'? That would fail
-    #elsif (date.month < @open_month && date.month <= @close_month && date.day <= @close_day)
-      #true
-      #this covers a date of '10-01' for a season running '09-01' to '01-31' this season spans a year
-    #elsif (date.month > @open_month && date.month <= @close_month && date.day <= @close_day)
-      #true
-    #else
-      #false
-    #end
   end
 
 end
