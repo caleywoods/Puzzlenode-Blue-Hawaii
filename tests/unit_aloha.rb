@@ -11,20 +11,8 @@ class TestAlohaRental < Test::Unit::TestCase
     assert_equal AlohaRental, @rental.class
   end
 
-  def test_respond_to_parsed?
-    assert_respond_to @rental, :parsed?
-  end
-
-  def test_parsed?
-    assert_equal true, @rental.parsed?
-  end
-
   def test_get_at_parsed_data
     assert_equal "Fern Grove Lodge", @rental.json[0]['name']
-  end
-
-  def test_date_file_read
-    assert_equal false, @rental.dates.empty?
   end
 
   def test_start_date_correct_class
@@ -47,13 +35,12 @@ class TestAlohaRental < Test::Unit::TestCase
     assert_equal 2011, @rental.stop_date.year
   end
 
-  def test_seasons_arrays
-    assert_equal false, @rental.seasons_lodges.empty?
-    assert_equal false, @rental.regular_lodges.empty?
+  def test_rental_array
+    assert_equal false, @rental.rentals.empty?
   end
 
-  def test_fixnum_cashify
-    #sert_equal "$#{
+  def test_float_cashify
+    assert_equal "$75.00", 75.00.cashify
   end
 
 end

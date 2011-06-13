@@ -17,13 +17,13 @@ class TestSeason < Test::Unit::TestCase
   end
 
   def test_open_date_parse
-    assert_equal 5, @season.open_month
-    assert_equal 7, @season.open_day
+    assert_equal 5, @season.first_day.month
+    assert_equal 7, @season.first_day.day
   end
 
   def test_close_date_parse
-    assert_equal 5, @season.close_month
-    assert_equal 20, @season.close_day
+    assert_equal 5, @season.last_day.month
+    assert_equal 20, @season.last_day.day
   end
 
 end
