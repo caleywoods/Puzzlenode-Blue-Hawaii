@@ -25,8 +25,7 @@ class Rental
   #
   # Returns a Rental class object.
   def initialize(name, seasons, clean_fee="$0")
-    @name = name
-    @seasons = seasons
+    @name, @seasons = name, seasons
     @clean_fee = if clean_fee.nil?
                    0
                  else

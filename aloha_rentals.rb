@@ -1,9 +1,5 @@
-require "rubygems"
-require "json"
-require "date"
-require_relative "rental"
-require_relative "season"
-require_relative "lib/cashify"
+%w[rubygems json date].each {|x| require x}
+%w[rental season lib/cashify].each {|x| require_relative x}
 
 class AlohaRental
   attr_accessor :json, :rentals, :seasons
@@ -22,8 +18,7 @@ class AlohaRental
   #
   # Returns an AlohaRental class object and calls parse
   def initialize(json_file, date_file)
-    @json_file = json_file
-    @date_file = date_file
+    @json_file, @date_file = json_file, date_file
 
     parse
   end
