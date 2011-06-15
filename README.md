@@ -7,4 +7,5 @@ Hawaii](http://puzzlenode.com/puzzles/13).
 ###Running###
 
 To see the solution simply execute `ruby output.rb
-"/path/to/vacations.json" "/path/to/input.txt"`
+"/path/to/vacations.json" "/path/to/input.txt"` and the results will be
+printed out.
