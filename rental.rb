@@ -21,7 +21,7 @@ class Rental
   #   1.) If we don't supply a cleaning fee it's defaulted
   #       to zero for simplicity.
   #   2.) split_em_up comes from string_spliter and does
-  #       a split('$').last.to_i on the cleaning fee.
+  #       a split('$').last on the cleaning fee.
   #
   # Returns a Rental class object.
   def initialize(name, seasons, clean_fee="$0")

@@ -37,7 +37,7 @@ class Season
   end
 
   # Accepts a date in order to check if the given date falls within
-  # the season and therefor would be subject to the nightly rate of
+  # the season and therefore would be subject to the nightly rate of
   # this season.
   #
   # date - A date of Date class supplied for checking against the season range
@@ -47,11 +47,6 @@ class Season
   #   date = Date.civil(2011,05,07)
   #   in_season?(date)
   #   # => true
-  #
-  # Notes:
-  #
-  #   1.) This is probably ripe for refactoring but given time constraints
-  #       it must work, it's a known tradeoff.
   #
   # Returns true or false depending on whether or not date is within the season.
   def in_season?(date)
