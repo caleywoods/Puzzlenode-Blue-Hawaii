@@ -1,6 +1,4 @@
 require "date"
-require_relative "string_splitter"
-include StringSplitter
 
 class Rental
   attr_accessor :name, :seasons, :clean_fee
@@ -20,17 +18,13 @@ class Rental
   #
   #   1.) If we don't supply a cleaning fee it's defaulted
   #       to zero for simplicity.
-  #   2.) split_em_up comes from string_spliter and does
-  #       a split('$').last on the cleaning fee.
+  #   2.) We have to check for nil? because the default
+  #       won't be used if nil is passed for clean_fee.
   #
   # Returns a Rental class object.
   def initialize(name, seasons, clean_fee="$0")
     @name, @seasons = name, seasons
-    @clean_fee = if clean_fee.nil?
-                   0
-                 else
-                   split_em_up(clean_fee).to_i
-                 end
+    @clean_fee = (clean_fee.nil?) ? 0 : clean_fee[1..-1].to_i
   end
 
   # Accepts a start date and stop date to iterate
@@ -57,6 +51,7 @@ class Rental
   # Returns the total price for each season as a float for precision calculations.
   def total(start_date, stop_date)
     total = 0
+
     @seasons.map do |season|
       (start_date...stop_date).each do |date| #using ... instead of .. because we don't pay on the final day
         total += season.rate unless !season.in_season?(date) #add to total unless the date isn't in season

@@ -1,11 +1,11 @@
 %w[rubygems json date].each {|x| require x}
-%w[rental season lib/cashify].each {|x| require_relative x}
+%w[rental season cashify].each {|x| require_relative x}
 
 class AlohaRental
   attr_accessor :json, :rentals, :seasons
   attr_reader :start_date, :stop_date
 
-  TAX = 1.0411416.to_f
+  TAX = 1.0411416
 
   # Accepts a json file containing vacation rentals and a date file that represents a stay range.
   #
@@ -34,6 +34,7 @@ class AlohaRental
   def parse
     @json = JSON.parse(File.read(@json_file))
     dates = File.read(@date_file)
+
     dates =~ /(.*) \- (.*)/
     @start_date, @stop_date = Date.parse($1), Date.parse($2)
 
@@ -52,6 +53,7 @@ class AlohaRental
   # Once we've fininshed building the @rentals array all that's left to do is call the totals method.
   def builder
     @rentals = []
+
     @json.each do |lodge|
       if lodge['seasons']
         seasons = []
@@ -85,6 +87,7 @@ class AlohaRental
     totals = Hash[@rentals.map do |rental|
       [rental.name, (rental.total(@start_date, @stop_date) + rental.clean_fee) * TAX]
     end]
+
     totals.each do |resort|
       puts resort.first + ": " + resort.last.cashify
     end

@@ -1,8 +1,5 @@
 require "rubygems"
 require "date"
-require_relative "string_splitter"
-include StringSplitter
-
 class Season
   attr_accessor :first_day, :last_day, :rate
 
@@ -25,6 +22,8 @@ class Season
     close_date =~ /(\d{2})\-(\d{2})/
     close_month, close_day = $1.to_i, $2.to_i
 
+    # if your opening is greater than your closing
+    # you've probably spanned a year boundary
     if open_month > close_month
       @first_day = Date.civil(2011, open_month, open_day)
       @last_day = Date.civil(2012, close_month, close_day)
@@ -33,7 +32,7 @@ class Season
       @last_day = Date.civil(2011, close_month, close_day)
     end
 
-    @rate = split_em_up(rate).to_i
+    @rate = rate[1..-1].to_i
   end
 
   # Accepts a date in order to check if the given date falls within
